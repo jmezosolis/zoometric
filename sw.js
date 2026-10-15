@@ -3,7 +3,7 @@
 // - RECURSOS: modelos y librerías (~40 MB). Se descargan una sola vez en segundo plano al instalar y se usan
 //   desde el teléfono aunque haya internet. Si un modelo cambia, cambiar también el nombre de RECURSOS.
 // - EXTRA: lo que se pide a otros servidores (SAM y su librería): se guarda al usarlo por primera vez.
-const APP = 'zoometric-app-v4';
+const APP = 'zoometric-app-v5';
 const RECURSOS = 'zoometric-recursos-v2';
 const EXTRA = 'zoometric-extra-v1';
 const LISTA_APP = ['./', './worker-yolo.js', './manifest.webmanifest', './icono-192.png', './icono-512.png', './icono-512-adaptable.png', './icono-apple.png'];

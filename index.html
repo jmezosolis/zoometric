@@ -101,7 +101,7 @@
   </section>
   <aside id="right">
     <div class="tools4">
-      <button data-mode="seg" class="on" title="Clic sobre el animal; clic derecho excluye">SAM</button>
+      <button data-mode="seg" title="Clic sobre el animal; clic derecho excluye">SAM</button>
       <button data-mode="scale" title="Marcar la regla">Regla</button>
       <button data-mode="add">Pincel</button>
       <button data-mode="erase">Borrador</button>
@@ -217,7 +217,7 @@ const loupe = $('loupe'), lctx = loupe.getContext('2d');
 const overlay = document.createElement('canvas'), octx = overlay.getContext('2d');
 
 const images = [];           // { id, name, file, url, img, W, H, points, labels, cands, candIdx, mask, scalePts, dist, unit, ready, req }
-let cur = -1, mode = 'seg', reqSeq = 0, nextId = 1;
+let cur = -1, mode = 'ver', reqSeq = 0, nextId = 1; // 'ver': ninguna herramienta; tocar solo arrastra puntos
 
 // ---------- estado con temporizador ----------
 let busyText = '', busySince = 0;
@@ -824,7 +824,7 @@ cv.addEventListener('pointerdown', (e) => {
     im.refSource = 'manual';
     cv.setPointerCapture(e.pointerId);
     updateResults(); draw();
-  } else {
+  } else if (mode === 'add' || mode === 'erase') {
     painting = true; cv.setPointerCapture(e.pointerId);
     paint(p); renderOverlay(); draw();
   }
@@ -840,6 +840,8 @@ cv.addEventListener('pointermove', (e) => {
 cv.addEventListener('pointerup', () => {
   if (painting) { painting = false; calcZoo(images[cur]); updateResults(); draw(); }
   dragIdx = -1; dragZoo = null;
+  // regla marcada a mano: con los 2 extremos se suelta la herramienta para no borrarla con otro toque
+  if (mode === 'scale' && images[cur]?.scalePts.length === 2) setMode('ver');
   if (mode !== 'scale') loupe.style.display = 'none';
 });
 cv.addEventListener('pointerleave', () => { loupe.style.display = 'none'; });
@@ -858,11 +860,14 @@ function showLoupe(e, [x, y]) {
 
 function setMode(m) {
   mode = m;
+  cv.style.cursor = m === 'ver' ? 'default' : 'crosshair';
   document.querySelectorAll('[data-mode]').forEach((b) => b.classList.toggle('on', b.dataset.mode === m));
   if (m !== 'scale') loupe.style.display = 'none';
 }
-document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => setMode(b.dataset.mode));
-setMode('seg');
+// las herramientas se activan y desactivan con su botón
+const alternar = (m) => setMode(mode === m ? 'ver' : m);
+document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => alternar(b.dataset.mode));
+setMode('ver');
 
 $('undoPt').onclick = () => { const im = images[cur]; if (!im?.points.length) return; im.points.pop(); im.labels.pop(); draw(); requestSegment(); };
 $('redo').onclick = () => {
@@ -931,11 +936,11 @@ document.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k === 'a' || e.key === 'ArrowLeft') select(cur - 1);
   else if (k === 'd' || e.key === 'ArrowRight') select(cur + 1);
-  else if (k === 's') setMode('seg');
-  else if (k === 'e') setMode('scale');
+  else if (k === 's') alternar('seg');
+  else if (k === 'e') alternar('scale');
   else if (k === 'r') $('refManual').click();
-  else if (k === 'b') setMode('add');
-  else if (k === 'x') setMode('erase');
+  else if (k === 'b') alternar('add');
+  else if (k === 'x') alternar('erase');
   else if (k === 'z' && e.ctrlKey) $('undoPt').click();
 });
 
