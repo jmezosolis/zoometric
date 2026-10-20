@@ -82,6 +82,11 @@ const ESTILO = `
 .enl-camara video { flex: 1; min-height: 0; width: 100%; object-fit: contain; }
 .enl-camara .enl-barra { display: grid; gap: 8px; padding: 10px 12px calc(12px + env(safe-area-inset-bottom)); background: var(--panel); }
 .enl-camara .grande { min-height: 52px; font-size: 18px; }
+@media (orientation: landscape) and (max-height: 600px) {
+  .enl-camara { flex-direction: row; }
+  .enl-camara video { width: auto; height: 100%; }
+  .enl-camara .enl-barra { width: min(300px, 40vw); overflow-y: auto; align-content: start; padding: calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 10px 12px; }
+}
 `;
 
 function ponerEstilo() {
@@ -283,6 +288,7 @@ export function modoCamara(codigo) {
       <button class="primary grande enl-mandar" disabled>Tomar foto y mandar</button>
       <div class="enl-botones">
         <button class="enl-cambiar">Cambiar cámara</button>
+        <button class="enl-orientacion">Horizontal</button>
         <button class="enl-reintentar" hidden>Reintentar</button>
         <a class="btn" href="${location.pathname}">Salir del modo cámara</a>
       </div>
@@ -366,6 +372,32 @@ export function modoCamara(codigo) {
     }
   }
 
+  // Pantalla horizontal: la cámara manda el video apaisado y ocupa mejor la pantalla de la computadora.
+  // Fijar la orientación exige pantalla completa; donde no se puede (iPhone), se pide girarlo.
+  let horizontal = false;
+  async function cambiarOrientacion() {
+    const quiere = !horizontal;
+    try {
+      if (quiere) {
+        if (!document.fullscreenElement) await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+        await screen.orientation.lock('landscape');
+      } else {
+        await screen.orientation.lock?.('portrait').catch(() => {});
+        screen.orientation.unlock?.();
+        if (document.fullscreenElement) await document.exitFullscreen();
+      }
+      horizontal = quiere;
+    } catch {
+      if (quiere && document.fullscreenElement) await document.exitFullscreen().catch(() => {});
+      estado('Este celular no deja girar la pantalla desde la app: active la rotación automática y gire el celular.');
+    }
+    $e('.enl-orientacion').textContent = horizontal ? 'Vertical' : 'Horizontal';
+  }
+  // Si se sale de la pantalla completa (botón atrás), la orientación queda libre otra vez.
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && horizontal) { horizontal = false; $e('.enl-orientacion').textContent = 'Horizontal'; }
+  });
+  $e('.enl-orientacion').onclick = cambiarOrientacion;
   $e('.enl-mandar').onclick = () => mandarFoto(0);
   $e('.enl-reintentar').onclick = arrancar;
   $e('.enl-cambiar').onclick = () => {

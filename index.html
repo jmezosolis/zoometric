@@ -909,6 +909,8 @@ $('camara').onchange = (e) => {
   addFiles([new File([f], nombre, { type: f.type || 'image/jpeg' })]);
 };
 // Celular como cámara: las fotos del celular entran a la lista como las cargadas.
+// El QR es para la computadora: en un celular o tableta táctil el botón no se muestra.
+if (matchMedia('(pointer: coarse)').matches) $('enlazar').hidden = true;
 $('enlazar').onclick = async () => {
   try {
     const m = await import('./enlace.js');
