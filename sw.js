@@ -1,5 +1,7 @@
 // Zoometric sin internet.
-// - APP: página, manifiesto e íconos. Primero la red (para recibir versiones nuevas); sin internet, lo guardado.
+// - APP: página, manifiesto e íconos. Lo guardado se entrega de inmediato y la versión nueva se baja por
+//   detrás para la próxima vez: así abre igual sin red, con mala señal o cuando la red se queda colgada
+//   (algunas redes móviles con github.io), en vez de esperar a la red antes de mostrar nada.
 // - RECURSOS: modelos y librerías (~40 MB). Se descargan una sola vez en segundo plano al instalar y se usan
 //   desde el teléfono aunque haya internet. Si un modelo cambia, cambiar también el nombre de RECURSOS.
 // - EXTRA: lo que se pide a otros servidores (SAM y su librería): se guarda al usarlo por primera vez.
@@ -16,6 +18,27 @@ const LISTA_RECURSOS = [
   './vendor/xlsx-0.18.5/xlsx.full.min.js',
 ];
 const abs = (r) => new URL(r, self.location.href).href;
+/** Sin nada guardado (la primera visita), se espera a la red solo este tiempo. */
+const ESPERA_MS = 8000;
+
+function conLimite(promesa, ms) {
+  return Promise.race([promesa, new Promise((_, rechazar) => setTimeout(() => rechazar(new Error('La red no respondió')), ms))]);
+}
+
+// Baja juntas la página y lo demás de la app, para que la próxima visita no mezcle versiones.
+let actualizando = null;
+function actualizarApp() {
+  actualizando ??= (async () => {
+    const nuevos = await Promise.all(LISTA_APP.map(async (a) => {
+      const r = await fetch(abs(a), { cache: 'no-cache' });
+      if (!r.ok) throw new Error(a + ' ' + r.status);
+      return [abs(a), r];
+    }));
+    const cache = await caches.open(APP);
+    for (const [clave, r] of nuevos) await cache.put(clave, r);
+  })().catch(() => {}).finally(() => { actualizando = null; });
+  return actualizando;
+}
 
 async function avisar(msg) {
   for (const c of await self.clients.matchAll({ includeUncontrolled: true })) c.postMessage(msg);
@@ -71,7 +94,7 @@ self.addEventListener('fetch', (evento) => {
 
   if (propio && (url.pathname.includes('/modelos/') || url.pathname.includes('/vendor/'))) {
     evento.respondWith(
-      caches.match(pedido, { ignoreSearch: true }).then((g) => g ?? fetch(pedido).then((r) => { guardar(RECURSOS, url.origin + url.pathname, r); return r; })),
+      caches.match(pedido, { ignoreSearch: true, ignoreVary: true }).then((g) => g ?? fetch(pedido).then((r) => { guardar(RECURSOS, url.origin + url.pathname, r); return r; })),
     );
     return;
   }
@@ -81,11 +104,18 @@ self.addEventListener('fetch', (evento) => {
     }
     return;
   }
-  // página e íconos: primero la red; sin internet, lo guardado
+  // página e íconos: lo guardado primero y la versión nueva por detrás; sin nada guardado, la red con límite
   const clave = pedido.mode === 'navigate' ? abs('./') : url.origin + url.pathname;
+  const deLaApp = pedido.mode === 'navigate' || LISTA_APP.some((a) => abs(a) === clave);
   evento.respondWith(
-    fetch(pedido, { cache: 'no-cache' })
-      .then((r) => { if (pedido.mode === 'navigate' || LISTA_APP.some((a) => abs(a) === clave)) guardar(APP, clave, r); return r; })
-      .catch(() => caches.match(clave, { ignoreSearch: true }).then((g) => g ?? Response.error())),
+    caches.match(clave, { ignoreSearch: true, ignoreVary: true }).then((g) => {
+      if (g) {
+        if (deLaApp) evento.waitUntil(actualizarApp());
+        return g;
+      }
+      return conLimite(fetch(pedido, { cache: 'no-cache' }), ESPERA_MS)
+        .then((r) => { if (deLaApp) guardar(APP, clave, r); return r; })
+        .catch(() => Response.error());
+    }),
   );
 });
