@@ -8,4 +8,4 @@ Este repositorio contiene la app tal como se publica; sus archivos son su códig
 
 ## Licencia
 
-GNU Affero General Public License v3.0 (`LICENSE`). Incluye modelos YOLOv8 de Ultralytics (AGPL-3.0), onnxruntime-web (MIT) y SheetJS (Apache-2.0); sus licencias están en `vendor/`.
+GNU Affero General Public License v3.0 (`LICENSE`). Incluye modelos YOLOv8 de Ultralytics (AGPL-3.0), onnxruntime-web (MIT), SheetJS (Apache-2.0), PeerJS (MIT) y qrcode-generator (MIT); sus licencias están en `vendor/`.

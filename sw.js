@@ -8,7 +8,7 @@
 const APP = 'zoometric-app-v5';
 const RECURSOS = 'zoometric-recursos-v2';
 const EXTRA = 'zoometric-extra-v1';
-const LISTA_APP = ['./', './worker-yolo.js', './manifest.webmanifest', './icono-192.png', './icono-512.png', './icono-512-adaptable.png', './icono-apple.png'];
+const LISTA_APP = ['./', './worker-yolo.js', './enlace.js', './manifest.webmanifest', './icono-192.png', './icono-512.png', './icono-512-adaptable.png', './icono-apple.png'];
 const LISTA_RECURSOS = [
   './modelos/cerdo_regla.onnx',
   './modelos/animales_coco.onnx',

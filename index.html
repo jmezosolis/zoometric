@@ -89,6 +89,7 @@
   </select>
   <label class="btn primary">Cargar fotos<input id="files" type="file" accept="image/*" multiple></label>
   <label class="btn">Tomar foto<input id="camara" type="file" accept="image/*" capture="environment"></label>
+  <button id="enlazar" title="Usar la cámara del celular desde esta computadora">Celular como cámara</button>
   <button id="xlsx">Excel</button>
   <button id="instalar" class="primary" hidden>Instalar app</button>
   <span id="status"></span>
@@ -210,6 +211,11 @@ self.onmessage = async ({ data }) => {
 };
 </script>
 
+<script type="module">
+  // Abierta desde el QR de la computadora: la app es solo la cámara del celular.
+  const enlace = new URLSearchParams(location.search).get('enlace');
+  if (enlace) import('./enlace.js').then((m) => m.modoCamara(enlace));
+</script>
 <script type="module">
 const $ = (id) => document.getElementById(id);
 const cv = $('cv'), ctx = cv.getContext('2d');
@@ -902,6 +908,13 @@ $('camara').onchange = (e) => {
   const nombre = `foto_${t.getFullYear()}${dd(t.getMonth() + 1)}${dd(t.getDate())}_${dd(t.getHours())}${dd(t.getMinutes())}${dd(t.getSeconds())}.jpg`;
   addFiles([new File([f], nombre, { type: f.type || 'image/jpeg' })]);
 };
+// Celular como cámara: las fotos del celular entran a la lista como las cargadas.
+$('enlazar').onclick = async () => {
+  try {
+    const m = await import('./enlace.js');
+    await m.abrirEnlace({ alRecibir: (f) => addFiles([f]), avisar: setStatus });
+  } catch (e) { setStatus('No se pudo abrir el enlace: ' + (e.message || e)); }
+};
 try { const e = localStorage.getItem('zoometric.especie'); if (e && ESPECIES[e]) $('especie').value = e; } catch {}
 $('especie').onchange = () => {
   try { localStorage.setItem('zoometric.especie', $('especie').value); } catch {}
@@ -921,9 +934,10 @@ const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent), instalada = matchMe
 if (esIOS && !instalada) { $('instalar').hidden = false; $('instalar').onclick = () => setStatus('Compartir → «Agregar a pantalla de inicio»'); }
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   // al registrarse, el service worker descarga en segundo plano todo lo necesario para usar la app sin internet
+  // (en modo cámara del celular no hacen falta los modelos: no se bajan esos ~40 MB)
   navigator.serviceWorker.register('./sw.js').then(async (reg) => {
     await navigator.serviceWorker.ready;
-    reg.active?.postMessage({ tipo: 'estado' });
+    if (!new URLSearchParams(location.search).has('enlace')) reg.active?.postMessage({ tipo: 'estado' });
   }).catch(() => {});
 }
 const stage = $('stage');
