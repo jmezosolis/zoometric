@@ -65,7 +65,7 @@ self.onmessage = async ({ data }) => {
     // la detección con mayor puntaje entre las clases de la especie
     let pc = { j: -1, score: 0 };
     for (const c of clases) { const b = best(c); if (b.score > pc.score) pc = b; }
-    if (pc.score < 0.25) { postMessage({ type: 'auto', id, ok: false, reason: `No se detectó ${nombre} en la foto: corrige con SAM (clic sobre el animal)` }); return; }
+    if (pc.score < 0.25) { postMessage({ type: 'auto', id, ok: false, sinAnimal: true }); return; }
     const pig = maskFor(pc.j);
     const rc = claseRegla != null ? best(claseRegla) : { j: -1, score: 0 };
     const ruler = medirRegla(px, W, H, pig, rc.score >= 0.2 ? toOrig(boxL(rc.j)) : null, rc.score >= 0.2 ? maskFor(rc.j) : null);

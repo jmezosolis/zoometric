@@ -124,57 +124,58 @@
 <header>
   <h1>Zoometric</h1>
   <select id="especie" title="Especie">
-    <option value="cerdo">Cerdo</option>
-    <option value="bovino">Bovino</option>
-    <option value="ovino">Ovino</option>
-    <option value="caprino">Caprino</option>
-    <option value="equino">Equino</option>
-    <option value="otra">Otra especie</option>
+    <option value="cerdo" data-i18n="sp_cerdo">Cerdo</option>
+    <option value="bovino" data-i18n="sp_bovino">Bovino</option>
+    <option value="ovino" data-i18n="sp_ovino">Ovino</option>
+    <option value="caprino" data-i18n="sp_caprino">Caprino</option>
+    <option value="equino" data-i18n="sp_equino">Equino</option>
+    <option value="otra" data-i18n="sp_otra">Otra especie</option>
   </select>
-  <label class="btn primary">Cargar fotos<input id="files" type="file" accept="image/*" multiple></label>
-  <label class="btn">Tomar foto<input id="camara" type="file" accept="image/*" capture="environment"></label>
+  <select id="idioma" title="Idioma / Idioma"><option value="es">Español</option><option value="pt">Português</option></select>
+  <label class="btn primary"><span data-i18n="cargar">Cargar fotos</span><input id="files" type="file" accept="image/*" multiple></label>
+  <label class="btn"><span data-i18n="tomar">Tomar foto</span><input id="camara" type="file" accept="image/*" capture="environment"></label>
   <button id="xlsx">Excel</button>
-  <button id="instalar" class="primary" hidden>Instalar app</button>
-  <button id="manualAbrir" class="btn secundario" title="Cómo tomar la foto y usar la herramienta">Manual</button>
+  <button id="instalar" class="primary" hidden data-i18n="instalar">Instalar app</button>
+  <button id="manualAbrir" class="btn secundario" data-i18n-title="manual_t">Manual</button>
   <span id="status"></span>
 </header>
 <main>
   <aside><ul id="list"></ul></aside>
   <section id="stage">
-    <div id="drop"><strong>Carga o toma fotos laterales del animal</strong><span>Incluye una regla de medida conocida en la misma foto. Si es tu primera vez, abre el <b>Manual</b>.</span><button id="ejemplo" class="btn primary">Probar con 3 fotos de ejemplo</button></div>
+    <div id="drop"><strong data-i18n="drop_t">Carga o toma fotos laterales del animal</strong><span data-i18n="drop_p">Incluye una regla de medida conocida en la misma foto. Si es tu primera vez, abre el <b>Manual</b>.</span><button id="ejemplo" class="btn primary" data-i18n="ejemplo">Probar con 3 fotos de ejemplo</button></div>
     <canvas id="cv" hidden></canvas>
   </section>
   <aside id="right">
     <div class="tools4">
-      <button data-mode="seg" title="Clic sobre el animal; clic derecho excluye">SAM</button>
-      <button data-mode="scale" title="Marcar la regla">Regla</button>
-      <button data-mode="add">Pincel</button>
-      <button data-mode="erase">Borrador</button>
+      <button data-mode="seg" data-i18n-title="t_sam">SAM</button>
+      <button data-mode="scale" data-i18n-title="t_regla" data-i18n="b_regla">Regla</button>
+      <button data-mode="add" data-i18n="b_pincel">Pincel</button>
+      <button data-mode="erase" data-i18n="b_borrador">Borrador</button>
     </div>
     <div class="tools">
-      <button id="undoPt">Deshacer</button>
-      <button id="redo">Detectar de nuevo</button>
+      <button id="undoPt" data-i18n="b_deshacer">Deshacer</button>
+      <button id="redo" data-i18n="b_detectar">Detectar de nuevo</button>
     </div>
-    <input type="range" id="brush" min="3" max="80" value="20" title="Grosor del pincel">
+    <input type="range" id="brush" min="3" max="80" value="20" data-i18n-title="t_grosor">
 
-    <h2>Regla</h2>
+    <h2 data-i18n="h_regla">Regla</h2>
     <div id="refEstado" class="ref">—</div>
     <div class="fila">
       <input type="number" id="dist" min="0" step="0.1" value="20">
       <select id="unit"><option>cm</option><option>mm</option><option>m</option></select>
-      <button id="refManual">Marcar a mano</button>
+      <button id="refManual" data-i18n="b_mano">Marcar a mano</button>
     </div>
 
-    <h2>Medidas</h2>
+    <h2 data-i18n="h_medidas">Medidas</h2>
     <div class="big" id="area">—</div>
     <table>
-      <tr><td><span class="sw" style="background:#f2c200"></span>Altura a la cruz</td><td id="zCruz">—</td></tr>
-      <tr><td><span class="sw" style="background:#2bb8c9"></span>Altura a la grupa</td><td id="zGrupa">—</td></tr>
-      <tr><td><span class="sw" style="background:#e04a3a"></span>Profundidad de tórax</td><td id="zTorax">—</td></tr>
-      <tr><td><span class="sw" id="zLargoColor"></span>Longitud corporal</td><td id="zLargo">—</td></tr>
+      <tr><td><span class="sw" style="background:#f2c200"></span><span data-i18n="m_cruz">Altura a la cruz</span></td><td id="zCruz">—</td></tr>
+      <tr><td><span class="sw" style="background:#2bb8c9"></span><span data-i18n="m_grupa">Altura a la grupa</span></td><td id="zGrupa">—</td></tr>
+      <tr><td><span class="sw" style="background:#e04a3a"></span><span data-i18n="m_torax">Profundidad de tórax</span></td><td id="zTorax">—</td></tr>
+      <tr><td><span class="sw" id="zLargoColor"></span><span data-i18n="m_largo">Longitud corporal</span></td><td id="zLargo">—</td></tr>
     </table>
-    <button id="zooGirar" class="ancho">Girar orientación</button>
-    <div class="acerca">Zoometric 1.0.0 · <a href="https://github.com/jmezosolis/zoometric" target="_blank" rel="noopener">código abierto (AGPL-3.0)</a></div>
+    <button id="zooGirar" class="ancho" data-i18n="b_girar">Girar orientación</button>
+    <div class="acerca">Zoometric 1.0.0 · <a href="https://github.com/jmezosolis/zoometric" target="_blank" rel="noopener" data-i18n="acerca">código abierto (AGPL-3.0)</a></div>
   </aside>
 </main>
 <canvas id="loupe" width="160" height="160"></canvas>
@@ -182,96 +183,15 @@
 <div id="manual" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="manualTitulo">
   <div class="modal-card">
     <div class="modal-head">
-      <h2 id="manualTitulo">Manual de Zoometric</h2>
-      <button id="manualCerrar" class="icono-cerrar" aria-label="Cerrar manual">×</button>
+      <h2 id="manualTitulo" data-i18n="man_titulo">Manual de Zoometric</h2>
+      <button id="manualCerrar" class="icono-cerrar" data-i18n-aria="man_cerrar" aria-label="Cerrar manual">×</button>
     </div>
-
-    <section class="paso">
-      <svg viewBox="0 0 480 250" role="img" aria-label="Cámara perpendicular al costado del animal, a media altura, con la regla junto al animal">
-        <rect width="480" height="250" fill="#f4f8f5"/>
-        <line x1="20" y1="205" x2="460" y2="205" stroke="#9aa59f" stroke-width="2"/>
-        <text x="452" y="199" font-size="11" fill="#5e6a64" text-anchor="end">piso</text>
-        <rect x="30" y="112" width="50" height="34" rx="6" fill="#18211d"/>
-        <rect x="42" y="102" width="20" height="10" rx="3" fill="#18211d"/>
-        <circle cx="55" cy="129" r="9" fill="#9aa59f"/>
-        <text x="55" y="96" font-size="12" font-weight="700" fill="#18211d" text-anchor="middle">Cámara</text>
-        <text x="55" y="172" font-size="10.5" fill="#5e6a64" text-anchor="middle">media altura</text>
-        <line x1="84" y1="129" x2="168" y2="129" stroke="#1f7a4d" stroke-width="2" stroke-dasharray="6 5"/>
-        <text x="126" y="122" font-size="11" fill="#1f7a4d" text-anchor="middle">90°</text>
-        <rect x="128" y="96" width="12" height="108" fill="#f2c200" stroke="#18211d" stroke-width="1"/>
-        <path d="M128 104h5M128 116h8M128 128h5M128 140h8M128 152h5M128 164h8M128 176h5M128 188h8M128 200h5" stroke="#18211d" stroke-width="1"/>
-        <text x="134" y="88" font-size="11" font-weight="700" fill="#18211d" text-anchor="middle">Regla</text>
-        <image x="170" y="58" width="168" height="147" preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,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"/>
-        <text x="262" y="50" font-size="12" font-weight="700" fill="#18211d" text-anchor="middle">Animal de lado</text>
-        <text x="240" y="236" font-size="11" fill="#5e6a64" text-anchor="middle">Encuadra todo el animal: sin cortar cabeza, patas ni cola</text>
-      </svg>
-      <h3>1. Posición de la foto</h3>
-      <ul>
-        <li><b>De lado y perpendicular:</b> la cámara frente al costado del animal, a 90°, no de frente ni en diagonal.</li>
-        <li><b>Altura:</b> el lente a media altura del cuerpo, sin picar ni contrapicar.</li>
-        <li><b>Animal:</b> de pie, con las cuatro patas en el piso y la cabeza en línea con el cuerpo.</li>
-        <li><b>Regla:</b> junto al costado, a la misma distancia de la cámara que el animal, y visible completa.</li>
-        <li><b>Encuadre:</b> todo el animal dentro de la foto, sin cortar cabeza, patas ni cola.</li>
-      </ul>
-    </section>
-
-    <section class="paso" hidden>
-      <svg viewBox="0 0 480 120" role="img" aria-label="Flujo de trabajo, pasos 1 a 3">
-        <rect width="480" height="120" fill="#f4f8f5"/>
-        <rect x="14" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="34" cy="60" r="12" fill="#1f7a4d"/><text x="34" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">1</text>
-        <text x="54" y="56" font-size="12.5" font-weight="700" fill="#18211d">Cargar fotos</text>
-        <text x="54" y="73" font-size="11" fill="#5e6a64">o tomar foto</text>
-        <path d="M154 60 L168 60 M162 54 L168 60 L162 66" stroke="#1f7a4d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="172" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="192" cy="60" r="12" fill="#1f7a4d"/><text x="192" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">2</text>
-        <text x="212" y="56" font-size="12.5" font-weight="700" fill="#18211d">Elegir especie</text>
-        <text x="212" y="73" font-size="11" fill="#5e6a64">cerdo, bovino…</text>
-        <path d="M312 60 L326 60 M320 54 L326 60 L320 66" stroke="#1f7a4d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="330" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="350" cy="60" r="12" fill="#1f7a4d"/><text x="350" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">3</text>
-        <text x="370" y="56" font-size="12.5" font-weight="700" fill="#18211d">Revisar</text>
-        <text x="370" y="73" font-size="11" fill="#5e6a64">silueta y regla</text>
-      </svg>
-      <h3>2. Flujo de trabajo (pasos 1 a 3)</h3>
-      <ol>
-        <li><b>Cargar fotos:</b> una foto lateral por animal, con «Cargar fotos» o «Tomar foto».</li>
-        <li><b>Elegir especie:</b> en el selector del encabezado. Si la cambias en una foto ya cargada, pulsa «Detectar de nuevo».</li>
-        <li><b>Revisar la detección:</b> la silueta aparece en verde y la regla en amarillo. Si la regla no aparece, márcala a mano con sus dos extremos y escribe su longitud real.</li>
-      </ol>
-    </section>
-
-    <section class="paso" hidden>
-      <svg viewBox="0 0 480 120" role="img" aria-label="Flujo de trabajo, pasos 4 a 6">
-        <rect width="480" height="120" fill="#f4f8f5"/>
-        <rect x="14" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="34" cy="60" r="12" fill="#1f7a4d"/><text x="34" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">4</text>
-        <text x="54" y="56" font-size="12.5" font-weight="700" fill="#18211d">Corregir</text>
-        <text x="54" y="73" font-size="11" fill="#5e6a64">silueta (SAM)</text>
-        <path d="M154 60 L168 60 M162 54 L168 60 L162 66" stroke="#1f7a4d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="172" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="192" cy="60" r="12" fill="#1f7a4d"/><text x="192" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">5</text>
-        <text x="212" y="56" font-size="12.5" font-weight="700" fill="#18211d">Ajustar</text>
-        <text x="212" y="73" font-size="11" fill="#5e6a64">puntos de medida</text>
-        <path d="M312 60 L326 60 M320 54 L326 60 L320 66" stroke="#1f7a4d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="330" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
-        <circle cx="350" cy="60" r="12" fill="#1f7a4d"/><text x="350" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">6</text>
-        <text x="370" y="56" font-size="12.5" font-weight="700" fill="#18211d">Exportar</text>
-        <text x="370" y="73" font-size="11" fill="#5e6a64">Excel</text>
-      </svg>
-      <h3>3. Flujo de trabajo (pasos 4 a 6)</h3>
-      <ol>
-        <li><b>Corregir la silueta:</b> con SAM, clic sobre el animal para incluir y clic derecho para excluir. El pincel y el borrador sirven para retoques finos.</li>
-        <li><b>Ajustar puntos:</b> arrastra cruz, grupa, tórax, nuca o cola si no coinciden con el animal. Las medidas se recalculan mientras arrastras. Si la cabeza quedó del lado equivocado, usa «Girar orientación».</li>
-        <li><b>Exportar:</b> «Excel» genera el libro con las medidas, las instrucciones y la hoja de correlación. Atajos: <kbd>A</kbd>/<kbd>D</kbd> cambia de foto, <kbd>S</kbd> SAM, <kbd>E</kbd> regla, <kbd>B</kbd> pincel, <kbd>X</kbd> borrador, <kbd>Ctrl</kbd>+<kbd>Z</kbd> deshace.</li>
-      </ol>
-    </section>
-
+    <div id="pasos"></div>
     <div class="modal-nav">
-      <button id="manualAnt">Anterior</button>
+      <button id="manualAnt" data-i18n="m_ant">Anterior</button>
       <div class="puntos" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
       <span id="manualCuenta" class="hint">1 / 3</span>
-      <button id="manualSig" class="primary">Siguiente</button>
+      <button id="manualSig" class="primary" data-i18n="m_sig">Siguiente</button>
     </div>
   </div>
 </div>
@@ -285,6 +205,11 @@ let model = null, processor = null, loading = null;
 const cache = new Map();          // id -> Promise<{ inputs, emb }>
 let chain = Promise.resolve();    // las inferencias se ejecutan de una en una
 const serial = (fn) => (chain = chain.then(fn, fn));
+let LANG = 'es';
+const TX = {
+  es: { cargando: 'Cargando modelo…', descargando: 'Descargando modelo…', analizando: 'Analizando imagen…', segmentando: 'Segmentando…' },
+  pt: { cargando: 'Carregando modelo…', descargando: 'Baixando modelo…', analizando: 'Analisando imagem…', segmentando: 'Segmentando…' },
+};
 const status = (text, busy = false) => postMessage({ type: 'status', text, busy });
 
 function load() {
@@ -294,9 +219,9 @@ function load() {
       if (p.status !== 'progress' || !p.total) return;
       files[p.file] = [p.loaded, p.total];
       let l = 0, t = 0; for (const [a, b] of Object.values(files)) { l += a; t += b; }
-      status(`Descargando modelo… ${(100 * l / t).toFixed(0)} %`, true);
+      status(`${TX[LANG].descargando} ${(100 * l / t).toFixed(0)} %`, true);
     };
-    status('Cargando modelo…', true);
+    status(TX[LANG].cargando, true);
     model = await SamModel.from_pretrained(MODEL_ID, { progress_callback });
     processor = await AutoProcessor.from_pretrained(MODEL_ID, { progress_callback });
     postMessage({ type: 'ready' });
@@ -308,7 +233,7 @@ function embed(id, blob) {
   if (!cache.has(id)) {
     const p = serial(async () => {
       await load();
-      status('Analizando imagen…', true);
+      status(TX[LANG].analizando, true);
       const t0 = performance.now();
       const raw = await RawImage.fromBlob(blob);
       const inputs = await processor(raw);
@@ -326,7 +251,7 @@ function embed(id, blob) {
 async function decode({ id, blob, points, labels, req }) {
   const { inputs, emb } = await embed(id, blob);
   const out = await serial(async () => {
-    status('Segmentando…', true);
+    status(TX[LANG].segmentando, true);
     const [rh, rw] = inputs.reshaped_input_sizes[0];
     const pts = points.map(([x, y]) => [x * rw, y * rh]);
     const input_points = new Tensor('float32', pts.flat(), [1, 1, pts.length, 2]);
@@ -343,7 +268,8 @@ async function decode({ id, blob, points, labels, req }) {
 
 self.onmessage = async ({ data }) => {
   try {
-    if (data.type === 'load') await load();
+    if (data.type === 'lang') LANG = data.lang;
+    else if (data.type === 'load') await load();
     else if (data.type === 'embed') await embed(data.id, data.blob);
     else if (data.type === 'decode') await decode(data);
   } catch (e) {
@@ -353,6 +279,165 @@ self.onmessage = async ({ data }) => {
 </script>
 
 <script type="module">
+// ---------- idioma: español y portugués ----------
+const TXT = {
+  es: {
+    sp_cerdo: 'Cerdo', sp_bovino: 'Bovino', sp_ovino: 'Ovino', sp_caprino: 'Caprino', sp_equino: 'Equino', sp_otra: 'Otra especie',
+    cargar: 'Cargar fotos', tomar: 'Tomar foto', instalar: 'Instalar app',
+    manual_t: 'Cómo tomar la foto y usar la herramienta',
+    drop_t: 'Carga o toma fotos laterales del animal',
+    drop_p: 'Incluye una regla de medida conocida en la misma foto. Si es tu primera vez, abre el <b>Manual</b>.',
+    ejemplo: 'Probar con 3 fotos de ejemplo',
+    t_sam: 'Clic sobre el animal; clic derecho excluye', b_regla: 'Regla', t_regla: 'Marcar la regla',
+    b_pincel: 'Pincel', b_borrador: 'Borrador', b_deshacer: 'Deshacer', b_detectar: 'Detectar de nuevo',
+    t_grosor: 'Grosor del pincel', h_regla: 'Regla', b_mano: 'Marcar a mano', h_medidas: 'Medidas',
+    m_cruz: 'Altura a la cruz', m_grupa: 'Altura a la grupa', m_torax: 'Profundidad de tórax', m_largo: 'Longitud corporal',
+    b_girar: 'Girar orientación', acerca: 'código abierto (AGPL-3.0)',
+    man_titulo: 'Manual de Zoometric', man_cerrar: 'Cerrar manual', m_ant: 'Anterior', m_sig: 'Siguiente', m_cerrar: 'Cerrar',
+    err_sam: 'Error al iniciar SAM: ', err_red: 'revisa la conexión a internet', sam_listo: 'SAM listo',
+    haz_clic: 'Haz clic sobre el animal', error_pref: 'Error: ', err_detector: 'Error al iniciar el detector: ',
+    err_carpeta: 'revisa la carpeta modelos/', detectando: 'Detectando', detectadas: 'Detectadas', de: 'de',
+    ref_det: 'Detectada', ref_mano: 'Marcada a mano', ref_extremos: 'Toca los 2 extremos', ref_buscando: 'Buscando…',
+    ref_no: 'No detectada: márcala a mano', sin_ref: '⚠ sin referencia',
+    z_cruz: 'Cruz', z_grupa: 'Grupa', z_torax: 'Tórax', z_largo: 'Longitud', cabeza: 'Cabeza a la', izq: 'izquierda', der: 'derecha',
+    pulsa_detectar: 'Pulsa «Detectar de nuevo» para aplicarla a esta foto', instalada: 'Zoometric quedó instalada',
+    compartir: 'Compartir → «Agregar a pantalla de inicio»', cargando_ej: 'Cargando ejemplos…',
+    err_ej: 'No se pudieron cargar los ejemplos: ', ej_no: 'no se encontró el ejemplo ',
+    sin_animal: 'No se detectó {0} en la foto: corrige con SAM (clic sobre el animal)',
+    n_cerdo: 'un cerdo', n_bovino: 'un bovino', n_ovino: 'un ovino', n_caprino: 'un caprino', n_equino: 'un equino', n_animal: 'un animal',
+    no_abrir: 'No se pudo abrir ',
+    xlsx_lib: 'No se pudo cargar la librería de Excel',
+    w_cargando: 'Cargando modelo…', w_descargando: 'Descargando modelo…', w_analizando: 'Analizando imagen…', w_segmentando: 'Segmentando…',
+    esp_cerdo: 'Cerdo', esp_bovino: 'Bovino', esp_ovino: 'Ovino', esp_caprino: 'Caprino', esp_equino: 'Equino', esp_otra: 'Otra',
+    x_area: 'Área lateral (cm²)', x_largo_esp: 'Longitud corporal según la especie (cm)', x_cruz: 'Altura a la cruz (cm)',
+    x_grupa: 'Altura a la grupa (cm)', x_torax: 'Profundidad de tórax (cm)', x_lomo: 'Longitud corporal orejas–cola por el lomo (cm)',
+    x_recta: 'Longitud recta orejas–cola (cm)', x_tronco: 'Longitud del tronco hombro–isquion (cm)',
+    x_max_w: 'Longitud máxima de la silueta (cm)', x_max_h: 'Altura máxima de la silueta (cm)',
+    h_foto: 'Foto', h_id: 'ID animal (anotar)', h_esp: 'Especie', h_ref: 'Referencia', h_esc: 'Escala (px/cm)', h_pts: 'Puntos',
+    h_per: 'Perímetro torácico con cinta (cm) (anotar, opcional)', h_est: 'Peso estimado por fórmula de cinta (kg)', h_peso: 'PESO REAL (kg) (anotar)',
+    v_ref_auto: 'automática', v_ref_manual: 'manual', v_ref_falta: 'falta', v_pts_ajus: 'ajustados', v_pts_auto: 'automáticos', v_pts_sin: 'sin puntos',
+    s_instr: 'Instrucciones', s_datos: 'Datos', s_corr: 'Correlación', ins_0: 'Cómo usar este libro',
+    ins_1: '1. En la hoja Datos, anota el ID del animal y su PESO REAL (kg) en la última columna. Si mides el perímetro torácico con cinta, anótalo también.',
+    ins_2: '2. La hoja Correlación calcula sola n, r de Pearson, R², pendiente, intercepto y la ecuación lineal de cada variable contra el peso.',
+    ins_3: '3. Si hay varias fotos del mismo animal, usa el mismo ID; para el análisis conviene promediar sus medidas o dejar una sola foto por animal.',
+    ins_4: '4. Puedes agregar más filas debajo (hasta la fila {0}) pegando datos de otras sesiones.',
+    ins_6: 'Definición de las medidas (vista lateral, escala con la regla de referencia)',
+    ins_7: 'Área lateral: área de la silueta del animal (incluye cabeza y patas).',
+    ins_8: 'Altura a la cruz: del punto más alto de la cruz (sobre las patas delanteras) al piso, perpendicular a la línea que une las pezuñas.',
+    ins_9: 'Altura a la grupa: del punto más alto de la grupa (sobre las patas traseras) al piso.',
+    ins_10: 'Profundidad de tórax: del dorso al esternón, justo detrás del codo (diámetro dorsoesternal).',
+    ins_11: 'Longitud corporal según la especie: en cerdos, de la base de las orejas a la base de la cola por el lomo; en bovinos, ovinos, caprinos y equinos, de la punta del hombro (encuentro) a la punta del isquion.',
+    ins_12: 'Longitud orejas–cola por el lomo: de la base de las orejas (nuca) a la base de la cola, siguiendo el perfil dorsal (como la cinta sobre el lomo).',
+    ins_13: 'Longitud recta orejas–cola: la misma, en línea recta.',
+    ins_14: 'Longitud hombro–isquion: de la punta del hombro (encuentro) a la punta del isquion (nalga).',
+    ins_15: 'Peso por fórmula de cinta (cerdos): perímetro torácico² (m) × longitud corporal (m) × 69.3 (equivale a lb = perímetro² × largo / 400, en pulgadas). Para otras especies usa la regresión de la hoja Correlación.',
+    ins_17: 'Notas: las medidas provienen de una sola foto lateral; la postura (cabeza abajo, patas abiertas) y la distancia de la regla al plano del animal influyen. Validar contra cinta métrica.',
+    c_var: 'Variable', c_n: 'n (fotos con peso)', c_r: 'r de Pearson', c_r2: 'R²', c_pend: 'Pendiente (kg por unidad)',
+    c_inter: 'Intercepto (kg)', c_eq: 'Ecuación', c_extra_per: 'Perímetro torácico con cinta (cm)', c_extra_est: 'Peso estimado por fórmula de cinta (kg)',
+    c_nota: 'Se llena sola al anotar el PESO REAL en la hoja Datos. Se necesitan al menos 3 animales con peso; con menos de 20–30 los coeficientes son poco confiables.',
+    c_peso: 'Peso = ',
+    m1_h: '1. Posición de la foto',
+    m1_1: '<b>De lado y perpendicular:</b> la cámara frente al costado del animal, a 90°, no de frente ni en diagonal.',
+    m1_2: '<b>Altura:</b> el lente a media altura del cuerpo, sin picar ni contrapicar.',
+    m1_3: '<b>Animal:</b> de pie, con las cuatro patas en el piso y la cabeza en línea con el cuerpo.',
+    m1_4: '<b>Regla:</b> junto al costado, a la misma distancia de la cámara que el animal, y visible completa.',
+    m1_5: '<b>Encuadre:</b> todo el animal dentro de la foto, sin cortar cabeza, patas ni cola.',
+    cam_aria: 'Cámara perpendicular al costado del animal, a media altura, con la regla junto al animal',
+    cam_piso: 'piso', cam_camara: 'Cámara', cam_media: 'media altura', cam_regla: 'Regla', cam_animal: 'Animal de lado',
+    cam_encuadre: 'Encuadra todo el animal: sin cortar cabeza, patas ni cola',
+    m2_h: '2. Flujo de trabajo (pasos 1 a 3)',
+    m2_1: '<b>Cargar fotos:</b> una foto lateral por animal, con «Cargar fotos» o «Tomar foto».',
+    m2_2: '<b>Elegir especie:</b> en el selector del encabezado. Si la cambias en una foto ya cargada, pulsa «Detectar de nuevo».',
+    m2_3: '<b>Revisar la detección:</b> la silueta aparece en verde y la regla en amarillo. Si la regla no aparece, márcala a mano con sus dos extremos y escribe su longitud real.',
+    f1_aria: 'Flujo de trabajo, pasos 1 a 3', f1_a: 'Cargar fotos', f1_b: 'o tomar foto', f2_a: 'Elegir especie', f2_b: 'cerdo, bovino…', f3_a: 'Revisar', f3_b: 'silueta y regla',
+    m3_h: '3. Flujo de trabajo (pasos 4 a 6)',
+    m3_1: '<b>Corregir la silueta:</b> con SAM, clic sobre el animal para incluir y clic derecho para excluir. El pincel y el borrador sirven para retoques finos.',
+    m3_2: '<b>Ajustar puntos:</b> arrastra cruz, grupa, tórax, nuca o cola si no coinciden con el animal. Las medidas se recalculan mientras arrastras. Si la cabeza quedó del lado equivocado, usa «Girar orientación».',
+    m3_3: '<b>Exportar:</b> «Excel» genera el libro con las medidas, las instrucciones y la hoja de correlación. Atajos: <kbd>A</kbd>/<kbd>D</kbd> cambia de foto, <kbd>S</kbd> SAM, <kbd>E</kbd> regla, <kbd>B</kbd> pincel, <kbd>X</kbd> borrador, <kbd>Ctrl</kbd>+<kbd>Z</kbd> deshace.',
+    f2_aria: 'Flujo de trabajo, pasos 4 a 6', f4_a: 'Corregir', f4_b: 'silueta (SAM)', f5_a: 'Ajustar', f5_b: 'puntos de medida', f6_a: 'Exportar', f6_b: 'Excel',
+  },
+  pt: {
+    sp_cerdo: 'Suíno', sp_bovino: 'Bovino', sp_ovino: 'Ovino', sp_caprino: 'Caprino', sp_equino: 'Equino', sp_otra: 'Outra espécie',
+    cargar: 'Carregar fotos', tomar: 'Tirar foto', instalar: 'Instalar app',
+    manual_t: 'Como tirar a foto e usar a ferramenta',
+    drop_t: 'Carregue ou tire fotos laterais do animal',
+    drop_p: 'Inclua uma régua de medida conhecida na mesma foto. Se é a primeira vez, abra o <b>Manual</b>.',
+    ejemplo: 'Testar com 3 fotos de exemplo',
+    t_sam: 'Clique no animal; clique direito exclui', b_regla: 'Régua', t_regla: 'Marcar a régua',
+    b_pincel: 'Pincel', b_borrador: 'Borracha', b_deshacer: 'Desfazer', b_detectar: 'Detectar de novo',
+    t_grosor: 'Espessura do pincel', h_regla: 'Régua', b_mano: 'Marcar à mão', h_medidas: 'Medidas',
+    m_cruz: 'Altura da cernelha', m_grupa: 'Altura da garupa', m_torax: 'Profundidade do tórax', m_largo: 'Comprimento corporal',
+    b_girar: 'Girar orientação', acerca: 'código aberto (AGPL-3.0)',
+    man_titulo: 'Manual do Zoometric', man_cerrar: 'Fechar manual', m_ant: 'Anterior', m_sig: 'Próximo', m_cerrar: 'Fechar',
+    err_sam: 'Erro ao iniciar o SAM: ', err_red: 'verifique a conexão com a internet', sam_listo: 'SAM pronto',
+    haz_clic: 'Clique sobre o animal', error_pref: 'Erro: ', err_detector: 'Erro ao iniciar o detector: ',
+    err_carpeta: 'verifique a pasta modelos/', detectando: 'Detectando', detectadas: 'Detectadas', de: 'de',
+    ref_det: 'Detectada', ref_mano: 'Marcada à mão', ref_extremos: 'Toque nas 2 extremidades', ref_buscando: 'Procurando…',
+    ref_no: 'Não detectada: marque à mão', sin_ref: '⚠ sem referência',
+    z_cruz: 'Cernelha', z_grupa: 'Garupa', z_torax: 'Tórax', z_largo: 'Comprimento', cabeza: 'Cabeça à', izq: 'esquerda', der: 'direita',
+    pulsa_detectar: 'Clique em «Detectar de novo» para aplicar a esta foto', instalada: 'Zoometric foi instalado',
+    compartir: 'Compartilhar → «Adicionar à tela de início»', cargando_ej: 'Carregando exemplos…',
+    err_ej: 'Não foi possível carregar os exemplos: ', ej_no: 'exemplo não encontrado ',
+    sin_animal: 'Não foi detectado {0} na foto: corrija com SAM (clique no animal)',
+    n_cerdo: 'um suíno', n_bovino: 'um bovino', n_ovino: 'um ovino', n_caprino: 'um caprino', n_equino: 'um equino', n_animal: 'um animal',
+    no_abrir: 'Não foi possível abrir ',
+    xlsx_lib: 'Não foi possível carregar a biblioteca do Excel',
+    w_cargando: 'Carregando modelo…', w_descargando: 'Baixando modelo…', w_analizando: 'Analisando imagem…', w_segmentando: 'Segmentando…',
+    esp_cerdo: 'Suíno', esp_bovino: 'Bovino', esp_ovino: 'Ovino', esp_caprino: 'Caprino', esp_equino: 'Equino', esp_otra: 'Outra',
+    x_area: 'Área lateral (cm²)', x_largo_esp: 'Comprimento corporal conforme a espécie (cm)', x_cruz: 'Altura da cernelha (cm)',
+    x_grupa: 'Altura da garupa (cm)', x_torax: 'Profundidade do tórax (cm)', x_lomo: 'Comprimento corporal orelha–cauda pelo dorso (cm)',
+    x_recta: 'Comprimento reto orelha–cauda (cm)', x_tronco: 'Comprimento do tronco ombro–ísquio (cm)',
+    x_max_w: 'Comprimento máximo da silhueta (cm)', x_max_h: 'Altura máxima da silhueta (cm)',
+    h_foto: 'Foto', h_id: 'ID do animal (anotar)', h_esp: 'Espécie', h_ref: 'Referência', h_esc: 'Escala (px/cm)', h_pts: 'Pontos',
+    h_per: 'Perímetro torácico com fita (cm) (anotar, opcional)', h_est: 'Peso estimado pela fórmula da fita (kg)', h_peso: 'PESO REAL (kg) (anotar)',
+    v_ref_auto: 'automática', v_ref_manual: 'manual', v_ref_falta: 'faltando', v_pts_ajus: 'ajustados', v_pts_auto: 'automáticos', v_pts_sin: 'sem pontos',
+    s_instr: 'Instruções', s_datos: 'Dados', s_corr: 'Correlação', ins_0: 'Como usar esta planilha',
+    ins_1: '1. Na aba Dados, anote o ID do animal e o seu PESO REAL (kg) na última coluna. Se medir o perímetro torácico com fita, anote-o também.',
+    ins_2: '2. A aba Correlação calcula sozinha n, r de Pearson, R², inclinação, intercepto e a equação linear de cada variável em relação ao peso.',
+    ins_3: '3. Se houver várias fotos do mesmo animal, use o mesmo ID; para a análise, o ideal é calcular a média das medidas ou deixar só uma foto por animal.',
+    ins_4: '4. Você pode adicionar mais linhas abaixo (até a linha {0}) colando dados de outras sessões.',
+    ins_6: 'Definição das medidas (vista lateral, escala com a régua de referência)',
+    ins_7: 'Área lateral: área da silhueta do animal (inclui cabeça e patas).',
+    ins_8: 'Altura da cernelha: do ponto mais alto da cernelha (sobre as patas dianteiras) ao chão, perpendicular à linha que une os cascos.',
+    ins_9: 'Altura da garupa: do ponto mais alto da garupa (sobre as patas traseiras) ao chão.',
+    ins_10: 'Profundidade do tórax: do dorso ao esterno, logo atrás do cotovelo (diâmetro dorsoesternal).',
+    ins_11: 'Comprimento corporal conforme a espécie: em suínos, da base das orelhas à base da cauda pelo dorso; em bovinos, ovinos, caprinos e equinos, da ponta do ombro (encontro) à ponta do ísquio.',
+    ins_12: 'Comprimento orelha–cauda pelo dorso: da base das orelhas (nuca) à base da cauda, seguindo o perfil dorsal (como a fita sobre o dorso).',
+    ins_13: 'Comprimento reto orelha–cauda: o mesmo, em linha reta.',
+    ins_14: 'Comprimento ombro–ísquio: da ponta do ombro (encontro) à ponta do ísquio (nádega).',
+    ins_15: 'Peso pela fórmula da fita (suínos): perímetro torácico² (m) × comprimento corporal (m) × 69,3 (equivale a lb = perímetro² × comprimento / 400, em polegadas). Para outras espécies, use a regressão da aba Correlação.',
+    ins_17: 'Notas: as medidas vêm de uma única foto lateral; a postura (cabeça baixa, patas abertas) e a distância da régua ao plano do animal influenciam. Validar com fita métrica.',
+    c_var: 'Variável', c_n: 'n (fotos com peso)', c_r: 'r de Pearson', c_r2: 'R²', c_pend: 'Inclinação (kg por unidade)',
+    c_inter: 'Intercepto (kg)', c_eq: 'Equação', c_extra_per: 'Perímetro torácico com fita (cm)', c_extra_est: 'Peso estimado pela fórmula da fita (kg)',
+    c_nota: 'Preenche-se sozinha ao anotar o PESO REAL na aba Dados. São necessários pelo menos 3 animais com peso; com menos de 20–30, os coeficientes são pouco confiáveis.',
+    c_peso: 'Peso = ',
+    m1_h: '1. Posição da foto',
+    m1_1: '<b>De lado e perpendicular:</b> a câmera de frente para a lateral do animal, a 90°, não de frente nem na diagonal.',
+    m1_2: '<b>Altura:</b> a lente na meia altura do corpo, sem picar nem contrapicar.',
+    m1_3: '<b>Animal:</b> em pé, com as quatro patas no chão e a cabeça alinhada com o corpo.',
+    m1_4: '<b>Régua:</b> ao lado da lateral, à mesma distância da câmera que o animal, e totalmente visível.',
+    m1_5: '<b>Enquadramento:</b> o animal inteiro dentro da foto, sem cortar cabeça, patas nem cauda.',
+    cam_aria: 'Câmera perpendicular à lateral do animal, na meia altura, com a régua ao lado do animal',
+    cam_piso: 'chão', cam_camara: 'Câmera', cam_media: 'meia altura', cam_regla: 'Régua', cam_animal: 'Animal de lado',
+    cam_encuadre: 'Enquadre o animal inteiro: sem cortar cabeça, patas nem cauda',
+    m2_h: '2. Fluxo de trabalho (passos 1 a 3)',
+    m2_1: '<b>Carregar fotos:</b> uma foto lateral por animal, com «Carregar fotos» ou «Tirar foto».',
+    m2_2: '<b>Escolher espécie:</b> no seletor do cabeçalho. Se trocar em uma foto já carregada, clique em «Detectar de novo».',
+    m2_3: '<b>Revisar a detecção:</b> a silhueta aparece em verde e a régua em amarelo. Se a régua não aparecer, marque-a à mão nas duas extremidades e escreva o comprimento real.',
+    f1_aria: 'Fluxo de trabalho, passos 1 a 3', f1_a: 'Carregar fotos', f1_b: 'ou tirar foto', f2_a: 'Escolher espécie', f2_b: 'suíno, bovino…', f3_a: 'Revisar', f3_b: 'silhueta e régua',
+    m3_h: '3. Fluxo de trabalho (passos 4 a 6)',
+    m3_1: '<b>Corrigir a silhueta:</b> com SAM, clique no animal para incluir e clique direito para excluir. O pincel e a borracha servem para retoques finos.',
+    m3_2: '<b>Ajustar pontos:</b> arraste cernelha, garupa, tórax, nuca ou cauda se não coincidirem com o animal. As medidas são recalculadas enquanto você arrasta. Se a cabeça ficou do lado errado, use «Girar orientação».',
+    m3_3: '<b>Exportar:</b> «Excel» gera a planilha com as medidas, as instruções e a aba de correlação. Atalhos: <kbd>A</kbd>/<kbd>D</kbd> troca de foto, <kbd>S</kbd> SAM, <kbd>E</kbd> régua, <kbd>B</kbd> pincel, <kbd>X</kbd> borracha, <kbd>Ctrl</kbd>+<kbd>Z</kbd> desfaz.',
+    f2_aria: 'Fluxo de trabalho, passos 4 a 6', f4_a: 'Corrigir', f4_b: 'silhueta (SAM)', f5_a: 'Ajustar', f5_b: 'pontos de medida', f6_a: 'Exportar', f6_b: 'Excel',
+  },
+};
+let lang = (() => {
+  try { const g = localStorage.getItem('zoometric.idioma'); if (g === 'es' || g === 'pt') return g; } catch {}
+  return (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt' : 'es';
+})();
+const t = (k, ...a) => a.reduce((s, v, i) => s.replace(`{${i}}`, v), TXT[lang][k] ?? TXT.es[k] ?? k);
+
 const $ = (id) => document.getElementById(id);
 const cv = $('cv'), ctx = cv.getContext('2d');
 const loupe = $('loupe'), lctx = loupe.getContext('2d');
@@ -378,20 +463,21 @@ let samWorker = null;
 function sam() {
   if (samWorker) return samWorker;
   samWorker = new Worker(URL.createObjectURL(new Blob([$('workerSrc').textContent], { type: 'text/javascript' })), { type: 'module' });
-  samWorker.onerror = (e) => setStatus('Error al iniciar SAM: ' + (e.message || 'revisa la conexión a internet'));
+  samWorker.onerror = (e) => setStatus(t('err_sam') + (e.message || t('err_red')));
   samWorker.onmessage = onSamMessage;
+  samWorker.postMessage({ type: 'lang', lang });
   return samWorker;
 }
 function onSamMessage({ data: m }) {
   if (m.type === 'status') setStatus(m.text, m.busy);
-  else if (m.type === 'ready') setStatus('SAM listo');
+  else if (m.type === 'ready') setStatus(t('sam_listo'));
   else if (m.type === 'embedded') {
     const im = images.find((x) => x.id === m.id);
     if (im) im.ready = true;
-    if (images[cur]?.id === m.id && !images[cur].points.length) setStatus('Haz clic sobre el animal');
+    if (images[cur]?.id === m.id && !images[cur].points.length) setStatus(t('haz_clic'));
     renderList();
   } else if (m.type === 'mask') onMask(m);
-  else if (m.type === 'error') setStatus('Error: ' + m.text);
+  else if (m.type === 'error') setStatus(t('error_pref') + m.text);
 }
 
 // ---------- detección automática (YOLO entrenado) ----------
@@ -399,16 +485,15 @@ function onSamMessage({ data: m }) {
 const COCO = new URL('modelos/animales_coco.onnx', location.href).href;
 const ANIMALES = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 const ESPECIES = {
-  cerdo: { nombre: 'un cerdo', url: new URL('modelos/cerdo_regla.onnx', location.href).href, clases: [0], claseRegla: 1, largo: 'largo' },
-  bovino: { nombre: 'un bovino', url: COCO, clases: [19, 17, 21, 20], largo: 'tronco' },
-  ovino: { nombre: 'un ovino', url: COCO, clases: [18, 19, 16], largo: 'tronco' },
-  caprino: { nombre: 'un caprino', url: COCO, clases: [18, 19, 16, 17], largo: 'tronco' },
-  equino: { nombre: 'un equino', url: COCO, clases: [17, 22, 19], largo: 'tronco' },
-  otra: { nombre: 'un animal', url: COCO, clases: ANIMALES, largo: 'tronco' },
+  cerdo: { nombre: 'n_cerdo', url: new URL('modelos/cerdo_regla.onnx', location.href).href, clases: [0], claseRegla: 1, largo: 'largo' },
+  bovino: { nombre: 'n_bovino', url: COCO, clases: [19, 17, 21, 20], largo: 'tronco' },
+  ovino: { nombre: 'n_ovino', url: COCO, clases: [18, 19, 16], largo: 'tronco' },
+  caprino: { nombre: 'n_caprino', url: COCO, clases: [18, 19, 16, 17], largo: 'tronco' },
+  equino: { nombre: 'n_equino', url: COCO, clases: [17, 22, 19], largo: 'tronco' },
+  otra: { nombre: 'n_animal', url: COCO, clases: ANIMALES, largo: 'tronco' },
 };
-const ESPECIE_TXT = { cerdo: 'Cerdo', bovino: 'Bovino', ovino: 'Ovino', caprino: 'Caprino', equino: 'Equino', otra: 'Otra' };
 const yolo = new Worker('./worker-yolo.js');
-yolo.onerror = (e) => setStatus('Error al iniciar el detector: ' + (e.message || 'revisa la carpeta modelos/'));
+yolo.onerror = (e) => setStatus(t('err_detector') + (e.message || t('err_carpeta')));
 const cola = [];
 let enCurso = null;
 function encolar(im) { im.especie = $('especie').value; im.autoState = 'pendiente'; cola.push(im); siguiente(); }
@@ -416,7 +501,7 @@ function siguiente() {
   if (enCurso || !cola.length) return;
   enCurso = cola.shift();
   const hechas = images.filter((x) => x.autoState === 'hecho' || x.autoState === 'error').length;
-  setStatus(`Detectando ${hechas + 1}/${images.length}…`);
+  setStatus(`${t('detectando')} ${hechas + 1}/${images.length}…`);
   const E = ESPECIES[enCurso.especie] ?? ESPECIES.otra;
   yolo.postMessage({ id: enCurso.id, blob: enCurso.file, url: E.url, clases: E.clases, claseRegla: E.claseRegla ?? null, nombre: E.nombre });
 }
@@ -427,12 +512,12 @@ yolo.onmessage = ({ data: m }) => {
   if (cola.length) siguiente();
   else {
     const ok = images.filter((x) => x.autoState === 'hecho').length;
-    setStatus(ok === images.length ? '' : `Detectadas ${ok} de ${images.length}`);
+    setStatus(ok === images.length ? '' : `${t('detectadas')} ${ok} ${t('de')} ${images.length}`);
   }
 };
 
 function aplicarAuto(im, m) {
-  if (!m.ok) { im.autoState = 'error'; im.autoMsg = m.reason; renderList(); return; }
+  if (!m.ok) { im.autoState = 'error'; im.autoMsg = m.sinAnimal ? t('sin_animal', t(ESPECIES[im.especie]?.nombre ?? 'n_animal')) : m.reason; renderList(); return; }
   im.autoState = 'hecho'; im.autoMsg = '';
   im.points = []; im.labels = []; im.cands = null; im.req = ++reqSeq;
   const mask = m.pig;
@@ -460,10 +545,10 @@ function usarDetectada(im) {
 
 function estadoReferencia(im) {
   if (!im) return ['', '—'];
-  if (im.scalePts.length === 2) return [im.refSource === 'auto' ? 'auto' : 'manual', im.refSource === 'auto' ? 'Detectada' : 'Marcada a mano'];
-  if (im.scalePts.length === 1 || im.refSource === 'manual') return ['falta', 'Toca los 2 extremos'];
-  if (!im.autoState || im.autoState === 'pendiente') return ['', 'Buscando…'];
-  return ['falta', 'No detectada: márcala a mano'];
+  if (im.scalePts.length === 2) return [im.refSource === 'auto' ? 'auto' : 'manual', im.refSource === 'auto' ? t('ref_det') : t('ref_mano')];
+  if (im.scalePts.length === 1 || im.refSource === 'manual') return ['falta', t('ref_extremos')];
+  if (!im.autoState || im.autoState === 'pendiente') return ['', t('ref_buscando')];
+  return ['falta', t('ref_no')];
 }
 
 // ---------- medidas corporales a partir de la silueta lateral ----------
@@ -689,7 +774,7 @@ function requestSegment() {
     type: 'decode', id: im.id, blob: im.file, req: im.req,
     points: im.points.map(([x, y]) => [x / im.W, y / im.H]), labels: im.labels,
   });
-  if (!im.ready) setStatus('Analizando imagen…', true);
+  if (!im.ready) setStatus(t('w_analizando'), true);
 }
 
 function onMask(m) {
@@ -840,15 +925,15 @@ function dibujarZoo(im, s) {
     ctx.fillStyle = k.startsWith('pie') ? '#fff' : '#111'; ctx.fill();
     ctx.lineWidth = 2 * s; ctx.strokeStyle = k.startsWith('pie') ? '#111' : '#fff'; ctx.stroke();
   }
-  etiqueta(P.cruz, 'Cruz' + val('cruz'), ZOO_COL.cruz);
-  etiqueta(P.grupa, 'Grupa' + val('grupa'), ZOO_COL.grupa);
-  etiqueta(P.toraxInf, 'Tórax' + val('torax'), ZOO_COL.torax);
-  if (princ === 'largo') etiqueta(P.cola, 'Longitud' + val('largo'), ZOO_COL.largo);
-  else etiqueta(P.isquion, 'Longitud' + val('tronco'), ZOO_COL.tronco);
+  etiqueta(P.cruz, t('z_cruz') + val('cruz'), ZOO_COL.cruz);
+  etiqueta(P.grupa, t('z_grupa') + val('grupa'), ZOO_COL.grupa);
+  etiqueta(P.toraxInf, t('z_torax') + val('torax'), ZOO_COL.torax);
+  if (princ === 'largo') etiqueta(P.cola, t('z_largo') + val('largo'), ZOO_COL.largo);
+  else etiqueta(P.isquion, t('z_largo') + val('tronco'), ZOO_COL.tronco);
 }
 
 const dist2 = ([a, b]) => Math.hypot(a[0] - b[0], a[1] - b[1]);
-const fmt = (v, d = 1) => v.toLocaleString('es-MX', { minimumFractionDigits: d, maximumFractionDigits: d });
+const fmt = (v, d = 1) => v.toLocaleString(lang === 'pt' ? 'pt-BR' : 'es-MX', { minimumFractionDigits: d, maximumFractionDigits: d });
 
 function measure(im) {
   if (!im.mask) return null;
@@ -890,7 +975,7 @@ function renderList() {
   images.forEach((im, i) => {
     const li = document.createElement('li');
     li.className = i === cur ? 'active' : '';
-    const a = im.result?.area != null ? `${fmt(im.result.area, 0)} ${im.unit}²${im.refSource === 'manual' ? ' ✎' : ''}` : im.mask ? '⚠ sin referencia' : im.autoState === 'error' ? '⚠' : im.autoState === 'pendiente' ? '…' : '';
+    const a = im.result?.area != null ? `${fmt(im.result.area, 0)} ${im.unit}²${im.refSource === 'manual' ? ' ✎' : ''}` : im.mask ? t('sin_ref') : im.autoState === 'error' ? '⚠' : im.autoState === 'pendiente' ? '…' : '';
     const falta = im.mask && im.result?.area == null;
     li.innerHTML = `<span>${i + 1}. ${im.name.replace(/^WhatsApp Image /, '')}</span><span class="a${falta ? ' falta' : ''}">${a}</span>`;
     li.onclick = () => select(i);
@@ -906,7 +991,7 @@ async function addFiles(files) {
   for (const f of list) {
     const url = URL.createObjectURL(f);
     const img = new Image();
-    await new Promise((ok, mal) => { img.onload = ok; img.onerror = () => mal(new Error('No se pudo abrir ' + f.name)); img.src = url; });
+    await new Promise((ok, mal) => { img.onload = ok; img.onerror = () => mal(new Error(t('no_abrir') + f.name)); img.src = url; });
     images.push({ id: nextId++, name: f.name, file: f, url, img, W: img.naturalWidth, H: img.naturalHeight, points: [], labels: [], cands: null, candIdx: 0, mask: null, scalePts: [], dist: +$('dist').value, unit: $('unit').value, result: null, ready: false, req: 0, autoState: null, autoMask: null, autoMsg: '', rulerInfo: null, refSource: null });
   }
   if (images.length) { $('drop').hidden = true; cv.hidden = false; if (cur < 0) select(0); else renderList(); }
@@ -1029,7 +1114,7 @@ $('dist').oninput = $('unit').onchange = () => {
   for (const im of images) { im.dist = +$('dist').value; im.unit = $('unit').value; im.result = measure(im); }
   updateResults(); draw();
 };
-$('zooGirar').onclick = () => { const im = images[cur]; if (!im?.zoo) return; im.orient = !im.zoo.cabIzq; calcZoo(im, true); updateResults(); draw(); setStatus(`Cabeza a la ${im.orient ? 'izquierda' : 'derecha'}`); };
+$('zooGirar').onclick = () => { const im = images[cur]; if (!im?.zoo) return; im.orient = !im.zoo.cabIzq; calcZoo(im, true); updateResults(); draw(); setStatus(`${t('cabeza')} ${im.orient ? t('izq') : t('der')}`); };
 $('refManual').onclick = () => {
   const im = images[cur]; if (!im) return;
   im.scalePts = []; im.refSource = 'manual'; im.dist = +$('dist').value; im.unit = $('unit').value;
@@ -1039,15 +1124,15 @@ $('files').onchange = (e) => { addFiles(e.target.files); e.target.value = ''; };
 // demostración: las tres fotos de ejemplo de la carpeta ejemplo/
 $('ejemplo').onclick = async () => {
   try {
-    setStatus('Cargando ejemplos…');
+    setStatus(t('cargando_ej'));
     const archivos = await Promise.all([1, 2, 3].map(async (n) => {
       const r = await fetch(`ejemplo/cerdo-ejemplo-${n}.jpg`);
-      if (!r.ok) throw new Error('no se encontró el ejemplo ' + n);
+      if (!r.ok) throw new Error(t('ej_no') + n);
       return new File([await r.blob()], `cerdo-ejemplo-${n}.jpg`, { type: 'image/jpeg' });
     }));
     setStatus('');
     addFiles(archivos);
-  } catch (e) { setStatus('No se pudieron cargar los ejemplos: ' + e.message); }
+  } catch (e) { setStatus(t('err_ej') + e.message); }
 };
 $('camara').onchange = (e) => {
   // las fotos de la cámara suelen llamarse igual (image.jpg): se les da un nombre único con la hora
@@ -1060,12 +1145,12 @@ $('camara').onchange = (e) => {
 try { const e = localStorage.getItem('zoometric.especie'); if (e && ESPECIES[e]) $('especie').value = e; } catch {}
 $('especie').onchange = () => {
   try { localStorage.setItem('zoometric.especie', $('especie').value); } catch {}
-  if (images[cur]) setStatus('Pulsa «Detectar de nuevo» para aplicarla a esta foto');
+  if (images[cur]) setStatus(t('pulsa_detectar'));
 };
 // ---------- app instalable y sin internet ----------
 let pedidoInstalar = null;
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); pedidoInstalar = e; $('instalar').hidden = false; });
-window.addEventListener('appinstalled', () => { $('instalar').hidden = true; pedidoInstalar = null; setStatus('Zoometric quedó instalada'); });
+window.addEventListener('appinstalled', () => { $('instalar').hidden = true; pedidoInstalar = null; setStatus(t('instalada')); });
 $('instalar').onclick = async () => {
   if (!pedidoInstalar) return;
   pedidoInstalar.prompt();
@@ -1073,7 +1158,7 @@ $('instalar').onclick = async () => {
   pedidoInstalar = null; $('instalar').hidden = true;
 };
 const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent), instalada = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-if (esIOS && !instalada) { $('instalar').hidden = false; $('instalar').onclick = () => setStatus('Compartir → «Agregar a pantalla de inicio»'); }
+if (esIOS && !instalada) { $('instalar').hidden = false; $('instalar').onclick = () => setStatus(t('compartir')); }
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   // al registrarse, el service worker descarga en segundo plano todo lo necesario para usar la app sin internet
   navigator.serviceWorker.register('./sw.js').then(async (reg) => {
@@ -1087,15 +1172,59 @@ stage.addEventListener('drop', (e) => { e.preventDefault(); addFiles(e.dataTrans
 window.addEventListener('resize', draw);
 
 // ---------- manual: tres láminas que se muestran una a la vez ----------
-const manual = $('manual'), pasos = [...manual.querySelectorAll('.paso')];
-let pasoAct = 0;
+const CABALLO = "data:image/png;base64,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";
+const manual = $('manual');
+let pasos = [], pasoAct = 0;
+const svgCamara = () => `<svg viewBox="0 0 480 250" role="img" aria-label="${t('cam_aria')}">
+  <rect width="480" height="250" fill="#f4f8f5"/>
+  <line x1="20" y1="205" x2="460" y2="205" stroke="#9aa59f" stroke-width="2"/>
+  <text x="452" y="199" font-size="11" fill="#5e6a64" text-anchor="end">${t('cam_piso')}</text>
+  <rect x="30" y="112" width="50" height="34" rx="6" fill="#18211d"/>
+  <rect x="42" y="102" width="20" height="10" rx="3" fill="#18211d"/>
+  <circle cx="55" cy="129" r="9" fill="#9aa59f"/>
+  <text x="55" y="96" font-size="12" font-weight="700" fill="#18211d" text-anchor="middle">${t('cam_camara')}</text>
+  <text x="55" y="172" font-size="10.5" fill="#5e6a64" text-anchor="middle">${t('cam_media')}</text>
+  <line x1="84" y1="129" x2="168" y2="129" stroke="#1f7a4d" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="126" y="122" font-size="11" fill="#1f7a4d" text-anchor="middle">90°</text>
+  <rect x="128" y="96" width="12" height="108" fill="#f2c200" stroke="#18211d" stroke-width="1"/>
+  <path d="M128 104h5M128 116h8M128 128h5M128 140h8M128 152h5M128 164h8M128 176h5M128 188h8M128 200h5" stroke="#18211d" stroke-width="1"/>
+  <text x="134" y="88" font-size="11" font-weight="700" fill="#18211d" text-anchor="middle">${t('cam_regla')}</text>
+  <image x="170" y="58" width="168" height="147" preserveAspectRatio="xMidYMid meet" href="${CABALLO}"/>
+  <text x="262" y="50" font-size="12" font-weight="700" fill="#18211d" text-anchor="middle">${t('cam_animal')}</text>
+  <text x="240" y="236" font-size="11" fill="#5e6a64" text-anchor="middle">${t('cam_encuadre')}</text>
+</svg>`;
+
+// tres cajas con número, titular y subtítulo; las flechas unen cada caja con la siguiente
+const svgFlujo = (aria, cajas) => {
+  const caja = (x, n, a, b) => `<rect x="${x}" y="30" width="136" height="60" rx="10" fill="#fff" stroke="#1f7a4d" stroke-width="1.5"/>
+    <circle cx="${x + 20}" cy="60" r="12" fill="#1f7a4d"/><text x="${x + 20}" y="65" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">${n}</text>
+    <text x="${x + 40}" y="56" font-size="12.5" font-weight="700" fill="#18211d">${a}</text>
+    <text x="${x + 40}" y="73" font-size="11" fill="#5e6a64">${b}</text>`;
+  const flecha = (x) => `<path d="M${x} 60 L${x + 14} 60 M${x + 8} 54 L${x + 14} 60 L${x + 8} 66" stroke="#1f7a4d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  return `<svg viewBox="0 0 480 120" role="img" aria-label="${aria}"><rect width="480" height="120" fill="#f4f8f5"/>
+    ${caja(14, cajas[0][0], cajas[0][1], cajas[0][2])}${flecha(154)}
+    ${caja(172, cajas[1][0], cajas[1][1], cajas[1][2])}${flecha(312)}
+    ${caja(330, cajas[2][0], cajas[2][1], cajas[2][2])}</svg>`;
+};
+
+function renderPasos() {
+  const li = (lista) => lista.map((k) => `<li>${t(k)}</li>`).join('');
+  $('pasos').innerHTML = `
+    <section class="paso">${svgCamara()}<h3>${t('m1_h')}</h3><ul>${li(['m1_1', 'm1_2', 'm1_3', 'm1_4', 'm1_5'])}</ul></section>
+    <section class="paso" hidden>${svgFlujo(t('f1_aria'), [[1, t('f1_a'), t('f1_b')], [2, t('f2_a'), t('f2_b')], [3, t('f3_a'), t('f3_b')]])}
+      <h3>${t('m2_h')}</h3><ol>${li(['m2_1', 'm2_2', 'm2_3'])}</ol></section>
+    <section class="paso" hidden>${svgFlujo(t('f2_aria'), [[4, t('f4_a'), t('f4_b')], [5, t('f5_a'), t('f5_b')], [6, t('f6_a'), t('f6_b')]])}
+      <h3>${t('m3_h')}</h3><ol>${li(['m3_1', 'm3_2', 'm3_3'])}</ol></section>`;
+  pasos = [...$('pasos').querySelectorAll('.paso')];
+  irPaso(pasoAct);
+}
 function irPaso(i) {
   pasoAct = Math.max(0, Math.min(pasos.length - 1, i));
   pasos.forEach((p, k) => { p.hidden = k !== pasoAct; });
   manual.querySelectorAll('.puntos span').forEach((d, k) => d.classList.toggle('on', k === pasoAct));
   $('manualCuenta').textContent = `${pasoAct + 1} / ${pasos.length}`;
   $('manualAnt').disabled = pasoAct === 0;
-  $('manualSig').textContent = pasoAct === pasos.length - 1 ? 'Cerrar' : 'Siguiente';
+  $('manualSig').textContent = pasoAct === pasos.length - 1 ? t('m_cerrar') : t('m_sig');
 }
 function abrirManual() { irPaso(0); manual.hidden = false; $('manualSig').focus(); }
 function cerrarManual() { manual.hidden = true; $('manualAbrir').focus(); }
@@ -1110,7 +1239,24 @@ document.addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowRight') irPaso(pasoAct + 1);
   else if (e.key === 'ArrowLeft') irPaso(pasoAct - 1);
 });
-irPaso(0);
+
+// ---------- cambio de idioma ----------
+function aplicarIdioma() {
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'es';
+  document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => { el.title = t(el.dataset.i18nTitle); });
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  $('idioma').value = lang;
+  renderPasos();
+  if (images.length) { renderList(); updateResults(); draw(); }
+}
+$('idioma').onchange = (e) => {
+  lang = e.target.value;
+  try { localStorage.setItem('zoometric.idioma', lang); } catch {}
+  if (samWorker) samWorker.postMessage({ type: 'lang', lang });
+  aplicarIdioma();
+};
+aplicarIdioma();
 
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || !manual.hidden) return;
@@ -1131,44 +1277,44 @@ function cargarSheetJS() {
   return new Promise((ok, mal) => {
     const sc = document.createElement('script');
     sc.src = new URL('vendor/xlsx-0.18.5/xlsx.full.min.js', location.href).href;
-    sc.onload = ok; sc.onerror = () => mal(new Error('No se pudo cargar la librería de Excel'));
+    sc.onload = ok; sc.onerror = () => mal(new Error(t('xlsx_lib')));
     document.head.appendChild(sc);
   });
 }
 const A_CM = { cm: 1, mm: 0.1, m: 100 };
 $('xlsx').onclick = async () => {
   if (!images.length) return;
-  try { await cargarSheetJS(); } catch (e) { setStatus('Error: ' + e.message); return; }
+  try { await cargarSheetJS(); } catch (e) { setStatus(t('error_pref') + e.message); return; }
   const MAXF = 1000; // filas disponibles para anotar más animales
   // columnas de medidas (en cm / cm²) que se correlacionan con el peso
   const VARS = [
-    ['Área lateral (cm²)', (r, f) => r?.area != null ? r.area * f * f : null],
-    ['Longitud corporal según la especie (cm)', (r, f, im) => r?.zoo ? r.zoo[(ESPECIES[im.especie] ?? ESPECIES.otra).largo] * f : null],
-    ['Altura a la cruz (cm)', (r, f) => r?.zoo ? r.zoo.cruz * f : null],
-    ['Altura a la grupa (cm)', (r, f) => r?.zoo ? r.zoo.grupa * f : null],
-    ['Profundidad de tórax (cm)', (r, f) => r?.zoo ? r.zoo.torax * f : null],
-    ['Longitud corporal orejas–cola por el lomo (cm)', (r, f) => r?.zoo ? r.zoo.largo * f : null],
-    ['Longitud recta orejas–cola (cm)', (r, f) => r?.zoo ? r.zoo.recta * f : null],
-    ['Longitud del tronco hombro–isquion (cm)', (r, f) => r?.zoo ? r.zoo.tronco * f : null],
-    ['Longitud máxima de la silueta (cm)', (r, f) => r?.w != null ? r.w * f : null],
-    ['Altura máxima de la silueta (cm)', (r, f) => r?.h != null ? r.h * f : null],
+    [t('x_area'), (r, f) => r?.area != null ? r.area * f * f : null],
+    [t('x_largo_esp'), (r, f, im) => r?.zoo ? r.zoo[(ESPECIES[im.especie] ?? ESPECIES.otra).largo] * f : null],
+    [t('x_cruz'), (r, f) => r?.zoo ? r.zoo.cruz * f : null],
+    [t('x_grupa'), (r, f) => r?.zoo ? r.zoo.grupa * f : null],
+    [t('x_torax'), (r, f) => r?.zoo ? r.zoo.torax * f : null],
+    [t('x_lomo'), (r, f) => r?.zoo ? r.zoo.largo * f : null],
+    [t('x_recta'), (r, f) => r?.zoo ? r.zoo.recta * f : null],
+    [t('x_tronco'), (r, f) => r?.zoo ? r.zoo.tronco * f : null],
+    [t('x_max_w'), (r, f) => r?.w != null ? r.w * f : null],
+    [t('x_max_h'), (r, f) => r?.h != null ? r.h * f : null],
   ];
   const col = (i) => XLSX.utils.encode_col(i);
   const C_FOTO = 0, C_ID = 1, C_ESP = 2, C_REF = 3, C_ESC = 4, C_V0 = 5, C_PTS = C_V0 + VARS.length;
   const C_PER = C_PTS + 1, C_EST = C_PER + 1, C_PESO = C_EST + 1;
-  const cab = ['Foto', 'ID animal (anotar)', 'Especie', 'Referencia', 'Escala (px/cm)', ...VARS.map((v) => v[0]),
-    'Puntos', 'Perímetro torácico con cinta (cm) (anotar, opcional)', 'Peso estimado por fórmula de cinta (kg)', 'PESO REAL (kg) (anotar)'];
+  const cab = [t('h_foto'), t('h_id'), t('h_esp'), t('h_ref'), t('h_esc'), ...VARS.map((v) => v[0]),
+    t('h_pts'), t('h_per'), t('h_est'), t('h_peso')];
   const ws = XLSX.utils.aoa_to_sheet([cab]);
   const L = col(C_V0 + 1); // longitud corporal según la especie
   images.forEach((im, k) => {
     const r = measure(im), f = A_CM[im.unit] ?? 1, fila = k + 2;
     const fijar = (c, v) => { if (v != null && v !== '') ws[col(c) + fila] = typeof v === 'number' ? { t: 'n', v: +v.toFixed(2) } : { t: 's', v }; };
     fijar(C_FOTO, im.name);
-    fijar(C_ESP, ESPECIE_TXT[im.especie] ?? '');
-    fijar(C_REF, im.scalePts.length === 2 ? (im.refSource === 'auto' ? 'automática' : 'manual') : 'falta');
+    fijar(C_ESP, t('esp_' + im.especie));
+    fijar(C_REF, im.scalePts.length === 2 ? (im.refSource === 'auto' ? t('v_ref_auto') : t('v_ref_manual')) : t('v_ref_falta'));
     if (r?.u) fijar(C_ESC, 1 / r.u / f);
     VARS.forEach(([, fn], i) => fijar(C_V0 + i, fn(r, f, im)));
-    fijar(C_PTS, im.zoo ? (im.zoo.editado ? 'ajustados' : 'automáticos') : 'sin puntos');
+    fijar(C_PTS, im.zoo ? (im.zoo.editado ? t('v_pts_ajus') : t('v_pts_auto')) : t('v_pts_sin'));
   });
   // fórmula de cinta: peso (kg) = perímetro² (m) × longitud (m) × 69.3  → con cm: P² × L / 14430
   for (let fila = 2; fila <= MAXF; fila++) {
@@ -1182,9 +1328,9 @@ $('xlsx').onclick = async () => {
 
   // hoja de correlaciones: se calcula sola al anotar el peso
   const peso = `Datos!$${col(C_PESO)}$2:$${col(C_PESO)}$${MAXF}`;
-  const filas = [['Variable', 'n (fotos con peso)', 'r de Pearson', 'R²', 'Pendiente (kg por unidad)', 'Intercepto (kg)', 'Ecuación']];
+  const filas = [[t('c_var'), t('c_n'), t('c_r'), t('c_r2'), t('c_pend'), t('c_inter'), t('c_eq')]];
   const cs = XLSX.utils.aoa_to_sheet(filas);
-  const corr = [...VARS.map((v, i) => [v[0], C_V0 + i]), ['Perímetro torácico con cinta (cm)', C_PER], ['Peso estimado por fórmula de cinta (kg)', C_EST]];
+  const corr = [...VARS.map((v, i) => [v[0], C_V0 + i]), [t('c_extra_per'), C_PER], [t('c_extra_est'), C_EST]];
   corr.forEach(([nom, c], i) => {
     const fila = i + 2, X = `Datos!$${col(c)}$2:$${col(c)}$${MAXF}`;
     cs['A' + fila] = { t: 's', v: nom };
@@ -1193,40 +1339,40 @@ $('xlsx').onclick = async () => {
     cs['D' + fila] = { t: 'n', f: `IFERROR(RSQ(${peso},${X}),"")` };
     cs['E' + fila] = { t: 'n', f: `IFERROR(SLOPE(${peso},${X}),"")` };
     cs['F' + fila] = { t: 'n', f: `IFERROR(INTERCEPT(${peso},${X}),"")` };
-    cs['G' + fila] = { t: 's', f: `IFERROR("Peso = "&TEXT(E${fila},"0.000")&" × X "&IF(F${fila}<0,"− ","+ ")&TEXT(ABS(F${fila}),"0.00"),"")` };
+    cs['G' + fila] = { t: 's', f: `IFERROR("${t('c_peso')}"&TEXT(E${fila},"0.000")&" × X "&IF(F${fila}<0,"− ","+ ")&TEXT(ABS(F${fila}),"0.00"),"")` };
   });
   cs['!ref'] = `A1:G${corr.length + 1}`;
   cs['!cols'] = [{ wch: 46 }, { wch: 16 }, { wch: 13 }, { wch: 10 }, { wch: 22 }, { wch: 15 }, { wch: 38 }];
   const nota = corr.length + 3;
-  cs['A' + nota] = { t: 's', v: 'Se llena sola al anotar el PESO REAL en la hoja Datos. Se necesitan al menos 3 animales con peso; con menos de 20–30 los coeficientes son poco confiables.' };
+  cs['A' + nota] = { t: 's', v: t('c_nota') };
   cs['!ref'] = `A1:G${nota}`;
 
   const ins = XLSX.utils.aoa_to_sheet([
-    ['Cómo usar este libro'],
-    ['1. En la hoja Datos, anota el ID del animal y su PESO REAL (kg) en la última columna. Si mides el perímetro torácico con cinta, anótalo también.'],
-    ['2. La hoja Correlación calcula sola n, r de Pearson, R², pendiente, intercepto y la ecuación lineal de cada variable contra el peso.'],
-    ['3. Si hay varias fotos del mismo animal, usa el mismo ID; para el análisis conviene promediar sus medidas o dejar una sola foto por animal.'],
-    ['4. Puedes agregar más filas debajo (hasta la fila ' + MAXF + ') pegando datos de otras sesiones.'],
+    [t('ins_0')],
+    [t('ins_1')],
+    [t('ins_2')],
+    [t('ins_3')],
+    [t('ins_4', MAXF)],
     [''],
-    ['Definición de las medidas (vista lateral, escala con la regla de referencia)'],
-    ['Área lateral: área de la silueta del animal (incluye cabeza y patas).'],
-    ['Altura a la cruz: del punto más alto de la cruz (sobre las patas delanteras) al piso, perpendicular a la línea que une las pezuñas.'],
-    ['Altura a la grupa: del punto más alto de la grupa (sobre las patas traseras) al piso.'],
-    ['Profundidad de tórax: del dorso al esternón, justo detrás del codo (diámetro dorsoesternal).'],
-    ['Longitud corporal según la especie: en cerdos, de la base de las orejas a la base de la cola por el lomo; en bovinos, ovinos, caprinos y equinos, de la punta del hombro (encuentro) a la punta del isquion.'],
-    ['Longitud orejas–cola por el lomo: de la base de las orejas (nuca) a la base de la cola, siguiendo el perfil dorsal (como la cinta sobre el lomo).'],
-    ['Longitud recta orejas–cola: la misma, en línea recta.'],
-    ['Longitud hombro–isquion: de la punta del hombro (encuentro) a la punta del isquion (nalga).'],
-    ['Peso por fórmula de cinta (cerdos): perímetro torácico² (m) × longitud corporal (m) × 69.3 (equivale a lb = perímetro² × largo / 400, en pulgadas). Para otras especies usa la regresión de la hoja Correlación.'],
+    [t('ins_6')],
+    [t('ins_7')],
+    [t('ins_8')],
+    [t('ins_9')],
+    [t('ins_10')],
+    [t('ins_11')],
+    [t('ins_12')],
+    [t('ins_13')],
+    [t('ins_14')],
+    [t('ins_15')],
     [''],
-    ['Notas: las medidas provienen de una sola foto lateral; la postura (cabeza abajo, patas abiertas) y la distancia de la regla al plano del animal influyen. Validar contra cinta métrica.'],
+    [t('ins_17')],
   ]);
   ins['!cols'] = [{ wch: 140 }];
 
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ins, 'Instrucciones');
-  XLSX.utils.book_append_sheet(wb, ws, 'Datos');
-  XLSX.utils.book_append_sheet(wb, cs, 'Correlación');
+  XLSX.utils.book_append_sheet(wb, ins, t('s_instr'));
+  XLSX.utils.book_append_sheet(wb, ws, t('s_datos'));
+  XLSX.utils.book_append_sheet(wb, cs, t('s_corr'));
   const hoy = new Date().toLocaleDateString('sv'); // AAAA-MM-DD en hora local
   XLSX.writeFile(wb, `zoometric_${hoy}.xlsx`);
   setStatus('');
