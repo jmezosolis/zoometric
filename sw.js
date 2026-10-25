@@ -5,10 +5,10 @@
 // - RECURSOS: modelos y librerías (~40 MB). Se descargan una sola vez en segundo plano al instalar y se usan
 //   desde el teléfono aunque haya internet. Si un modelo cambia, cambiar también el nombre de RECURSOS.
 // - EXTRA: lo que se pide a otros servidores (SAM y su librería): se guarda al usarlo por primera vez.
-const APP = 'zoometric-app-v5';
+const APP = 'zoometric-app-v7';
 const RECURSOS = 'zoometric-recursos-v2';
 const EXTRA = 'zoometric-extra-v1';
-const LISTA_APP = ['./', './worker-yolo.js', './enlace.js', './manifest.webmanifest', './icono-192.png', './icono-512.png', './icono-512-adaptable.png', './icono-apple.png'];
+const LISTA_APP = ['./', './worker-yolo.js', './manifest.webmanifest'];
 const LISTA_RECURSOS = [
   './modelos/cerdo_regla.onnx',
   './modelos/animales_coco.onnx',
@@ -16,6 +16,9 @@ const LISTA_RECURSOS = [
   './vendor/onnxruntime-web-1.20.1/ort-wasm-simd-threaded.mjs',
   './vendor/onnxruntime-web-1.20.1/ort-wasm-simd-threaded.wasm',
   './vendor/xlsx-0.18.5/xlsx.full.min.js',
+  './ejemplo/cerdo-ejemplo-1.jpg',
+  './ejemplo/cerdo-ejemplo-2.jpg',
+  './ejemplo/cerdo-ejemplo-3.jpg',
 ];
 const abs = (r) => new URL(r, self.location.href).href;
 /** Sin nada guardado (la primera visita), se espera a la red solo este tiempo. */
@@ -92,7 +95,7 @@ self.addEventListener('fetch', (evento) => {
   const url = new URL(pedido.url);
   const propio = url.origin === self.location.origin;
 
-  if (propio && (url.pathname.includes('/modelos/') || url.pathname.includes('/vendor/'))) {
+  if (propio && (url.pathname.includes('/modelos/') || url.pathname.includes('/vendor/') || url.pathname.includes('/ejemplo/'))) {
     evento.respondWith(
       caches.match(pedido, { ignoreSearch: true, ignoreVary: true }).then((g) => g ?? fetch(pedido).then((r) => { guardar(RECURSOS, url.origin + url.pathname, r); return r; })),
     );

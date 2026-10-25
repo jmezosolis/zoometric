@@ -1,0 +1,42 @@
+{
+  "title": "Zoometric: zoometría animal por visión por computadora",
+  "description": "Zoometría por visión por computadora a partir de una foto lateral del animal: área lateral, altura a la cruz y a la grupa, profundidad de tórax y longitud corporal, con exportación a Excel para correlacionar con el peso. App instalable que funciona sin internet.",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "AGPL-3.0-only",
+  "keywords": [
+    "zoometría",
+    "visión por computadora",
+    "ganadería",
+    "YOLOv8",
+    "PWA"
+  ],
+  "creators": [
+    {
+      "name": "Mezo Solís, Jesús Alberto"
+    },
+    {
+      "name": "Lopes da Costa, Ricardo"
+    },
+    {
+      "name": "Arcos Álvarez, Darwin Nicolás"
+    },
+    {
+      "name": "Sierra Vásquez, Ángel"
+    },
+    {
+      "name": "Piñeiro Vásquez, Ángel Trinidad"
+    },
+    {
+      "name": "Cauich Gevar, Luis Alberto"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://jmezosolis.github.io/zoometric/",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}
